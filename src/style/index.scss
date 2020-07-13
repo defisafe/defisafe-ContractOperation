@@ -1,4 +1,15 @@
 
+button {
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  &:hover {
+    border-color: #333;
+  }
+}
 
 .flex {
     display: flex;
@@ -9,6 +20,6 @@
 }
 
 .flex-m {
-    flex: 1;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
