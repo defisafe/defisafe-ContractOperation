@@ -3,6 +3,7 @@ import { chainIds } from '../../constants';
 import { useActiveWeb3React } from '../../hooks'
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { UnsupportedChainIdError } from '@web3-react/core';
+import cn from 'classnames';
 
 import style from './index.module.scss';
 
@@ -25,7 +26,7 @@ export default function Insure() {
   
   return (
     <div className={style.insure}>
-      <div className={style.head}>
+      <div className={cn(style.head, 'flex')}>
         <div>{chainIds[chainId]}</div>
         {
           account ? <div>{account}</div> : <button onClick={activeWall}>login</button>
