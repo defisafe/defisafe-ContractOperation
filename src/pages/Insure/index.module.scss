@@ -1,15 +1,4 @@
 .insure {
-  .head {
-      height: 50px;
-      border-bottom: 1px solid #eee;
-      padding: 0 15px;
-      .net {
-
-      }
-      .state {
-        text-align: right;
-      }
-  }
   .content {
     .left, .right {
       width: 50%;
@@ -17,34 +6,38 @@
     }
     .left {
       border-right: 1px solid #eee;
-      .form {
-        .formGroup {
-          display: flex;
-          align-items: center;
-          margin-bottom: 20px;
-          .label {
-            width: 100px;
+      
+    }
+    .right {
+      .title {
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+    }
+    .form {
+      .formGroup {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        .label {
+          width: 140px;
+        }
+        .formInput {
+          width: 220px;
+          height: 32px;
+          line-height: 32px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          outline: none;
+          margin-right: 10px;
+          &:focus {
+            border-color: #333;
           }
-          .formInput {
-            width: 220px;
-            height: 32px;
-            line-height: 32px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            outline: none;
-            &:focus {
-              border-color: #333;
-            }
-          }
-          textarea {
-            height: 100px !important;
-          }
+        }
+        textarea {
+          height: 100px !important;
         }
       }
     }
-  }
-  .noConnect {
-    text-align: center;
-    padding-top: 200px;
   }
 }
