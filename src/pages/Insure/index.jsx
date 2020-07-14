@@ -8,6 +8,7 @@ import ConnectView from '../../components/ConnectView';
 import Head from '../../components/Head';
 import useInput from '../../hooks/useInput';
 import cn from 'classnames';
+import ERC20_abi from '../../constants/erc20';
 
 import insureSty from './index.module.scss';
 
@@ -60,19 +61,30 @@ export default function Insure() {
     console.log(paramsArr);
     let ct = new Contract(ctAddr.value, ctAbi.value, library.getSigner(account).connectUnchecked());
 
-    if(!paramsArr.length) {
+    if (!paramsArr.length) {
       ct[ctMethod.value]().then(res => {
         alert('res' + res);
       });
     } else {
-      ct[ctMethod.value](paramsArr.map(e => e.value).join()).then(res => {
+      ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '2000000000000000000' }).then(res => {
         alert('res' + res);
       });
     }
   }
 
-  function approve() {
+  async function approve() {
+    let ct = new Contract(ERCAddr.value, ERC20_abi, library.getSigner(account).connectUnchecked());
 
+    let approveNum = await ct.allowance(account, approveAddr.value);
+
+    if (approveNum != 0) {
+      await ct.approve(approveAddr.value, 0);
+      let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
+      alert(res);
+    } else {
+      let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
+      alert(res);
+    }
   }
 
   return (

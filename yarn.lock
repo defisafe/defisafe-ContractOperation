@@ -1096,7 +1096,7 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@ethersproject/abi@^5.0.0":
+"@ethersproject/abi@^5.0.0", "@ethersproject/abi@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/@ethersproject/abi/download/@ethersproject/abi-5.0.1.tgz#b6ba2bfb4278fbd6328b608e09741c2475ddad9c"
   integrity sha1-tror+0J4+9Yyi2COCXQcJHXdrZw=
