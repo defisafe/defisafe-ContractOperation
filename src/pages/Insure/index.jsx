@@ -76,10 +76,10 @@ export default function Insure() {
   async function approve() {
     let ct = new Contract(ERCAddr.value, ERC20_abi, library.getSigner(account).connectUnchecked());
 
-    let approveNum = await ct.allowance(account, approveAddr.value);
-    console.log(approveNum.toString())
+    let approveNumber = await ct.allowance(account, approveAddr.value);
+    console.log(approveNum.value + '')
     
-    if (approveNum.toString() != 0) {
+    if (approveNumber.toString() != 0) {
       await ct.approve(approveAddr.value, BigNumber.from([0]));
       let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value + ''));
       alert(res);
