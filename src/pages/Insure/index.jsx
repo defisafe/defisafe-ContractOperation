@@ -21,6 +21,25 @@ function shortAddr(addr) {
   return addr;
 }
 
+//转换成数组
+function toFixedStr(x) {
+  if (Math.abs(x) < 1.0) {
+    var e = parseInt(x.toString().split('e-')[1]);
+    if (e) {
+        x *= Math.pow(10,e-1);
+        x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+    }
+  } else {
+    var e = parseInt(x.toString().split('+')[1]);
+    if (e > 20) {
+        e -= 20;
+        x /= Math.pow(10,e);
+        x += (new Array(e+1)).join('0');
+    }
+  }
+  return x;
+}
+
 export default function Insure() {
   const { account, chainId, activate, library } = useActiveWeb3React();
   let ctAddr = useInput();
@@ -77,14 +96,13 @@ export default function Insure() {
     let ct = new Contract(ERCAddr.value, ERC20_abi, library.getSigner(account).connectUnchecked());
 
     let approveNumber = await ct.allowance(account, approveAddr.value);
-    console.log(approveNum.value + '')
     
     if (approveNumber.toString() != 0) {
       await ct.approve(approveAddr.value, BigNumber.from([0]));
-      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18 + ''));
+      let res = await ct.approve(approveAddr.value, BigNumber.from(toFixedStr(approveNum.value * 1e18)+''));
       alert(res);
     } else {
-      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18 + ''));
+      let res = await ct.approve(approveAddr.value, BigNumber.from(toFixedStr(approveNum.value * 1e18)+''));
       alert(res);
     }
   }
