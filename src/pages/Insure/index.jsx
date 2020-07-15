@@ -75,16 +75,16 @@ export default function Insure() {
   async function approve() {
     let ct = new Contract(ERCAddr.value, ERC20_abi, library.getSigner(account).connectUnchecked());
 
-    let approveNum = await ct.allowance(account, approveAddr.value);
-
-    if (approveNum != 0) {
-      await ct.approve(approveAddr.value, 0);
+    // let approveNum = await ct.allowance(account, approveAddr.value);
+    // console.log(ct)
+    // if (approveNum != 0) {
+    //   await ct.approve(approveAddr.value, 0);
+    //   let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
+    //   alert(res);
+    // } else {
       let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
-      alert(res);
-    } else {
-      let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
-      alert(res);
-    }
+      // alert(res);
+    // }
   }
 
   return (
