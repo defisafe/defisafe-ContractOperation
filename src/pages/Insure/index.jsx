@@ -5,6 +5,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { UnsupportedChainIdError } from '@web3-react/core';
 import ConnectView from '../../components/ConnectView';
+import { BigNumber } from '@ethersproject/bignumber';
 import Head from '../../components/Head';
 import useInput from '../../hooks/useInput';
 import cn from 'classnames';
@@ -75,16 +76,17 @@ export default function Insure() {
   async function approve() {
     let ct = new Contract(ERCAddr.value, ERC20_abi, library.getSigner(account).connectUnchecked());
 
-    // let approveNum = await ct.allowance(account, approveAddr.value);
-    // console.log(ct)
-    // if (approveNum != 0) {
-    //   await ct.approve(approveAddr.value, 0);
-    //   let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
-    //   alert(res);
-    // } else {
-      let res = await ct.approve(approveAddr.value, approveNum.value * 1e18 + '');
-      // alert(res);
-    // }
+    let approveNum = await ct.allowance(account, approveAddr.value);
+    console.log(approveNum.toString())
+    
+    if (approveNum.toString() != 0) {
+      await ct.approve(approveAddr.value, BigNumber.from([0]));
+      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18));
+      alert(res);
+    } else {
+      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18));
+      alert(res);
+    }
   }
 
   return (
