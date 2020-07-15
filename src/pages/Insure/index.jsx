@@ -81,10 +81,10 @@ export default function Insure() {
     
     if (approveNumber.toString() != 0) {
       await ct.approve(approveAddr.value, BigNumber.from([0]));
-      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value + ''));
+      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18 + ''));
       alert(res);
     } else {
-      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value + ''));
+      let res = await ct.approve(approveAddr.value, BigNumber.from(approveNum.value * 1e18 + ''));
       alert(res);
     }
   }
