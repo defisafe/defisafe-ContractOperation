@@ -86,7 +86,7 @@ export default function Insure() {
         alert('res' + res);
       });
     } else {
-      ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '2000000000000000000' }).then(res => {
+      ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
         alert('res' + res);
       });
     }
