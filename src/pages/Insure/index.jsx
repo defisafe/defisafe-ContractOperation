@@ -78,24 +78,27 @@ export default function Insure() {
   }
 
   function runContract(type) {
+    debugger
     let ct = new Contract(ctAddr.value, ctAbi.value, library.getSigner(account).connectUnchecked());
+    console.log(ct);
     if(type == 'call') {
-      if (!paramsArr.length) {
+      if (paramsArr.length == 1 && !paramsArr[0].value) {
         ct.callStatic[ctMethod.value]().then(res => {
-          alert('res' + res);
+          alert('res:' + res);
         });
       } else {
         ct.callStatic[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
-          alert('res' + res);
+          alert('res:' + res);
         });
       }
     } else {
-      if (!paramsArr.length) {
+      if (paramsArr.length == 1 && !paramsArr[0].value) {
         ct[ctMethod.value]().then(res => {
           alert('res' + res);
         });
       } else {
-        ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
+        console.log(...paramsArr.map(e => e.value))
+        ct[ctMethod.value](...paramsArr.map(e => e.value), { value: '1000000000000000000', gasLimit: '10000000000000000' }).then(res => {
           alert('res' + res);
         });
       }
