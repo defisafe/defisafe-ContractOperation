@@ -77,18 +77,28 @@ export default function Insure() {
     setParamsArr(arr);
   }
 
-  function runContract() {
-    console.log(paramsArr);
+  function runContract(type) {
     let ct = new Contract(ctAddr.value, ctAbi.value, library.getSigner(account).connectUnchecked());
-
-    if (!paramsArr.length) {
-      ct[ctMethod.value]().then(res => {
-        alert('res' + res);
-      });
+    if(type == 'call') {
+      if (!paramsArr.length) {
+        ct.callStatic[ctMethod.value]().then(res => {
+          alert('res' + res);
+        });
+      } else {
+        ct.callStatic[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
+          alert('res' + res);
+        });
+      }
     } else {
-      ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
-        alert('res' + res);
-      });
+      if (!paramsArr.length) {
+        ct[ctMethod.value]().then(res => {
+          alert('res' + res);
+        });
+      } else {
+        ct[ctMethod.value](paramsArr.map(e => e.value).join(), { value: '0' }).then(res => {
+          alert('res' + res);
+        });
+      }
     }
   }
 
