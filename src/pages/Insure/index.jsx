@@ -78,7 +78,7 @@ export default function Insure() {
   }
 
   function runContract(type) {
-    debugger
+    
     let ct = new Contract(ctAddr.value, ctAbi.value, library.getSigner(account).connectUnchecked());
     console.log(ct);
     if(type == 'call') {
@@ -98,7 +98,7 @@ export default function Insure() {
         });
       } else {
         console.log(...paramsArr.map(e => e.value))
-        ct[ctMethod.value](...paramsArr.map(e => e.value), { value: '1000000000000000000', gasLimit: '10000000000000000' }).then(res => {
+        ct[ctMethod.value](...paramsArr.map(e => e.value), { value: 0 }).then(res => {
           alert('res' + res);
         });
       }
