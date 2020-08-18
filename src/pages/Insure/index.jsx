@@ -98,7 +98,7 @@ export default function Insure() {
         });
       } else {
         console.log(...paramsArr.map(e => e.value))
-        ct[ctMethod.value](...paramsArr.map(e => e.value), { value: 0 }).then(res => {
+        ct[ctMethod.value](...paramsArr.map(e => e.value), { value: 0, gasLimit: '10000000' }).then(res => {
           alert('res' + res);
         });
       }
